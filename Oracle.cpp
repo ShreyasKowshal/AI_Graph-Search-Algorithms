@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <queue>
+#include <limits>
+
 using namespace std;
 
 struct Edge {
@@ -7,66 +10,79 @@ struct Edge {
     int cost;
 };
 
-int n, m;
-vector<vector<Edge>> graph;
+void dijkstra(int start, int goal, const vector<vector<Edge>>& graph, vector<int>& parent, int& totalCost) {
+    int V = graph.size();
+    vector<int> dist(V, numeric_limits<int>::max());
+    dist[start] = 0;
 
-int findEdgeCost(int u, int v) {
-    for (auto &e : graph[u]) {
-        if (e.to == v) return e.cost;
+    using P = pair<int,int>;
+    priority_queue<P, vector<P>, greater<P>> pq;
+    pq.push({0, start});
+    parent.assign(V, -1);
+
+    while (!pq.empty()) {
+        int cost = pq.top().first;
+        int u = pq.top().second;
+        pq.pop();
+
+        if (cost > dist[u]) continue;
+        if (u == goal) break;
+
+        for (auto& edge : graph[u]) {
+            int v = edge.to;
+            int newCost = cost + edge.cost;
+            if (newCost < dist[v]) {
+                dist[v] = newCost;
+                parent[v] = u;
+                pq.push({newCost, v});
+            }
+        }
     }
-    return -1;
+
+    totalCost = dist[goal];
 }
 
 int main() {
-    cout << "Number of vertices: ";
-    cin >> n;
-    graph.assign(n, vector<Edge>());
-    cout << "Number of edges: ";
-    cin >> m;
+    int V, E;
+    cout << "Enter number of vertices: ";
+    cin >> V;
+    cout << "Enter number of edges: ";
+    cin >> E;
 
-    for (int i = 0; i < m; i++) {
-        int u,v,c;
-        cout << "Enter edge (from to cost): ";
+    vector<vector<Edge>> graph(V);
+    cout << "Enter edges (from to cost):\n";
+    for (int i = 0; i < E; i++) {
+        int u, v, c;
         cin >> u >> v >> c;
         graph[u].push_back({v,c});
-        graph[v].push_back({u,c});
+        graph[v].push_back({u,c}); // If graph is undirected; remove if directed
     }
 
     int start, goal;
-    cout << "Enter start vertex: ";
+    cout << "Enter start node: ";
     cin >> start;
-    cout << "Enter goal vertex: ";
+    cout << "Enter goal node: ";
     cin >> goal;
 
-    cout << "Enter number of vertices in the path (including start and goal): ";
-    int pathLen;
-    cin >> pathLen;
+    vector<int> parent;
+    int totalCost = 0;
+    dijkstra(start, goal, graph, parent, totalCost);
 
-    vector<int> path(pathLen);
-    cout << "Enter the path vertices in order:\n";
-    for (int i = 0; i < pathLen; i++) {
-        cin >> path[i];
+    vector<int> path;
+    for (int at = goal; at != -1; at = parent[at]) {
+        path.insert(path.begin(), at);
     }
 
-    if (path.front() != start || path.back() != goal) {
-        cout << "Path must start at " << start << " and end at " << goal << "\n";
-        return 0;
-    }
-
-    int cost = 0;
-    for (int i = 0; i + 1 < pathLen; i++) {
-        int c = findEdgeCost(path[i], path[i+1]);
-        if (c == -1) {
-            cout << "Invalid edge between " << path[i] << " and " << path[i+1] << "\n";
-            return 0;
+    if (path.empty() || path[0] != start || totalCost == numeric_limits<int>::max()) {
+        cout << "No path found from " << start << " to " << goal << ".\n";
+    } else {
+        cout << "Oracle path (shortest path): ";
+        for (size_t i = 0; i < path.size(); i++) {
+            cout << path[i];
+            if (i != path.size()-1) cout << "->";
         }
-        cost += c;
+        cout << "\nTotal cost: " << totalCost << "\n";
     }
 
-    cout << "Path accepted.\nPath: ";
-    for (int i = 0; i < pathLen; i++) {
-        cout << path[i];
-        if (i != pathLen - 1) cout << " -> ";
-    }
-    cout << "\nCost: " << cost << "\n";
+    return 0;
 }
