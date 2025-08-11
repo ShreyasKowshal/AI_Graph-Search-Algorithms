@@ -49,7 +49,7 @@ This repository contains implementations of **15 different graph search algorith
 14. **Branch and Bound + Cost + History**  
     Further improves branch and bound by tracking visited states and costs to avoid repeated work and cycles, enhancing efficiency and optimality.
 
-15. **‎ A* Algorithm**  
+15. **A Star**  
     Combines uniform-cost search and heuristics to efficiently find the lowest-cost path. A* guarantees optimality when the heuristic is admissible and consistent.
 
 ---
