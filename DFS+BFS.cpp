@@ -109,7 +109,6 @@ int main() {
                 }
             }
         }
-
         cout << "DFS+BFS path: ";
         for (size_t i = 0; i < path.size(); i++) {
             cout << path[i];
