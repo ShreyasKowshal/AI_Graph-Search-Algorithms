@@ -10,11 +10,11 @@ This repository contains implementations of **15 different graph search algorith
 1. **British Museum Search (Brute Force Search)**  
    Explores the entire search space by brute force without any heuristic guidance. It systematically checks every possible option to find the goal. This method guarantees a solution if one exists but is often computationally expensive.
 
-2. **Breadth-First Search (BFS)**  
-   Explores nodes level-by-level, expanding all neighbors at the current depth before moving deeper. BFS finds the shortest path in unweighted graphs and guarantees the shortest solution if all edges have equal cost.
-
-3. **Depth-First Search (DFS)**  
+2. **Depth-First Search (DFS)**  
    Explores as far down a branch as possible before backtracking. DFS is memory-efficient but may get stuck exploring deep paths and does not guarantee the shortest path.
+
+3. **Breadth-First Search (BFS)**  
+   Explores nodes level-by-level, expanding all neighbors at the current depth before moving deeper. BFS finds the shortest path in unweighted graphs and guarantees the shortest solution if all edges have equal cost.
 
 4. **DFS + BFS Hybrid**  
    Combines depth-first exploration with breadth-first search to balance deep search with systematic coverage, aiming to improve search efficiency and completeness.
@@ -49,7 +49,7 @@ This repository contains implementations of **15 different graph search algorith
 14. **Branch and Bound + Cost + History**  
     Further improves branch and bound by tracking visited states and costs to avoid repeated work and cycles, enhancing efficiency and optimality.
 
-15. **A* Search Algorithm**  
+15. **A* **  
     Combines uniform-cost search and heuristics to efficiently find the lowest-cost path. A* guarantees optimality when the heuristic is admissible and consistent.
 
 ---
