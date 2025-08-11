@@ -1,12 +1,7 @@
-#Graph Search AI Algorithms
+# Graph Search AI Algorithms
 
 This repository contains implementations of **15 different graph search algorithms** used in Artificial Intelligence and pathfinding problems. Each algorithm is implemented in C++ with a focus on demonstrating key AI search strategies, from uninformed brute force to heuristic and informed search.
 
----
-
-## Overview
-
-Graph search algorithms are essential for problem-solving in AI, enabling systems to explore state spaces, find optimal or feasible solutions, and navigate complex environments. This project offers a wide spectrum of such algorithms, illustrating how different strategies explore graphs, balance between exploration and exploitation, and utilize heuristics.
 
 ---
 
@@ -51,27 +46,17 @@ Graph search algorithms are essential for problem-solving in AI, enabling system
 13. **Branch and Bound with Cost and Estimated Heuristics**  
     Extends branch and bound by integrating heuristic estimates to guide pruning, improving search speed while maintaining optimality.
 
-14. **A* Search Algorithm**  
-    Combines the benefits of uniform-cost search and heuristics to find the lowest-cost path efficiently. A* guarantees optimality when the heuristic is admissible.
+14. **Branch and Bound + Cost + History**  
+    Further improves branch and bound by tracking visited states and costs to avoid repeated work and cycles, enhancing efficiency and optimality.
 
-15. **Brute Force Search**  
-    Explores all possible states exhaustively without heuristics, ensuring a solution is found but at the cost of high computational resources.
+15. **A* Search Algorithm**  
+    Combines uniform-cost search and heuristics to efficiently find the lowest-cost path. A* guarantees optimality when the heuristic is admissible and consistent.
 
-
-
-## Features
-
-- Clear and modular C++ implementations  
-- Variety of uninformed and informed search strategies  
-- Support for cycle detection and history tracking  
-- Sample input/output for demonstration  
-- Makefile for easy compilation and running
-
-
+---
 
 ## Usage
 
 1. Clone the repository:  
    ```bash
    git clone https://github.com/ShreyasKowshal/AI_Graph-Search-Algorithms.git
-   cd graph-search-ai
+   cd AI_Graph-Search-Algorithms
